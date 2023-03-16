@@ -5,18 +5,20 @@ CREATE DATABASE gameDB;
 USE gameDB;
 
 CREATE TABLE game (
-  gameId INT AUTO_INCREMENT PRIMARY KEY,
+  gameId INT NOT NULL AUTO_INCREMENT,
   inProgress BOOLEAN,
-  numberGenerated INT(4)
+  numberGenerated INT(4),
+  PRIMARY KEY(gameId)
 );
 
 
 CREATE TABLE round (
-  roundId INT AUTO_INCREMENT PRIMARY KEY,
+  roundId INT NOT NULL AUTO_INCREMENT,
   gameId INT,
   userGuess INT,
   partialCorrect INT,
   exactCorrect INT,
   createdAt TIMESTAMP,
+  PRIMARY KEY(roundId),
   FOREIGN KEY (gameId) REFERENCES game(gameId)
 );
