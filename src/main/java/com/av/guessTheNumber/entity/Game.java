@@ -1,38 +1,44 @@
 package com.av.guessTheNumber.entity;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "game")
 public class Game {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+    private int gameId;
+    private String generatedNumber;
+    private boolean inProgress;
 
-    @Column(name = "name")
-    private String name;
+
+
+    public Game(int gameId, String generatedNumber, boolean inProgress) {
+        this.gameId = gameId;
+        this.generatedNumber = generatedNumber;
+        this.inProgress = inProgress;
+    }
 
     public Game() {
+
     }
 
-    // Getters and setters
-    public Integer getId() {
-        return id;
+    public int getGameId() {
+        return gameId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
     }
 
-    public String getName() {
-        return name;
+    public boolean isInProgress() {
+        return inProgress;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setInProgress(boolean inProgress) {
+        this.inProgress = inProgress;
     }
 
+    public String getGeneratedNumber() {
+        return generatedNumber;
+    }
+
+    public void setGeneratedNumber(String generatedNumber) {
+        this.generatedNumber = generatedNumber;
+    }
 }
-
