@@ -57,4 +57,18 @@ public class ServiceLayer {
         Collections.shuffle(digits);
         return "" + digits.get(0) + digits.get(1) + digits.get(2) + digits.get(3);
     }
+
+    public Game getGameById(int gameId) {
+        Game game = gameDao.getGameById(gameId);
+
+        if(game.isInProgress()){
+            game.setGeneratedNumber(REDACTED);
+        }
+
+        return game;
+    }
+
+    public List<Round> getRoundsForGame(int gameId) {
+        return roundDao.getRoundsByGameId(gameId);
+    }
 }

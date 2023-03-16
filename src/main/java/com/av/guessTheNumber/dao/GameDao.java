@@ -8,4 +8,6 @@ public interface GameDao {
     List<Game> getAllGames();
 
     Game addGame(Game game);
+
+    Game getGameById(int gameId);
 }

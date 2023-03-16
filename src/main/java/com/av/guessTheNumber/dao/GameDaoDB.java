@@ -2,6 +2,7 @@ package com.av.guessTheNumber.dao;
 
 import com.av.guessTheNumber.entity.Game;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -35,6 +36,15 @@ public class GameDaoDB implements GameDao{
     }
 
 
+    @Override
+    public Game getGameById(int gameId) {
+        try{
+            final String GAME_BY_ID = "SELECT * FROM game WHERE gameId = ?";
+            return jdbcTemplate.queryForObject(GAME_BY_ID, new GameMapper(), gameId);
+        }catch (DataAccessException e) {
+            return null;
+        }
+    }
 
 
     private int getLastGameId() {
