@@ -1,0 +1,22 @@
+DROP DATABASE IF EXISTS gameDB;
+
+CREATE DATABASE gameDB;
+
+USE gameDB;
+
+CREATE TABLE game (
+  gameId INT AUTO_INCREMENT PRIMARY KEY,
+  inProgress BOOLEAN,
+  numberGenerated INT(4)
+);
+
+
+CREATE TABLE round (
+  roundId INT AUTO_INCREMENT PRIMARY KEY,
+  gameId INT,
+  userGuess INT,
+  partialCorrect INT,
+  exactCorrect INT,
+  createdAt TIMESTAMP,
+  FOREIGN KEY (gameId) REFERENCES game(gameId)
+);
