@@ -1,0 +1,44 @@
+DROP DATABASE IF EXISTS gameDB;
+
+CREATE DATABASE gameDB;
+
+USE gameDB;
+
+CREATE TABLE game (
+  gameId INT PRIMARY KEY AUTO_INCREMENT,
+  numberGenerated VARCHAR(4),
+  inProgress BOOLEAN
+);
+
+
+INSERT INTO game (numberGenerated, inProgress) VALUES 
+  ('2345', true),
+  ('8734', true),
+  ('9823', false),
+  ('6547', true),
+  ('1234', false);
+
+CREATE TABLE round (
+  roundId INT PRIMARY KEY AUTO_INCREMENT,
+  gameId INT,
+  userGuess VARCHAR(4),
+  partialCorrect INT,
+  exactCorrect INT,
+  createdAt TIMESTAMP,
+  FOREIGN KEY (gameId) REFERENCES game(gameId)
+);
+
+INSERT INTO round (gameId, userGuess, partialCorrect, exactCorrect, createdAt) 
+VALUES 
+  (1, '1234', 2, 1, '2023-03-15 08:00:00'),
+  (1, '8569', 0, 0, '2023-03-15 08:05:00'),
+  (1, '9438', 1, 2, '2023-03-15 08:10:00'),
+  (2, '3246', 1, 0, '2023-03-15 08:15:00'),
+  (2, '6571', 0, 0, '2023-03-15 08:20:00'),
+  (2, '2789', 2, 1, '2023-03-15 08:25:00'),
+  (3, '9807', 0, 0, '2023-03-15 08:30:00'),
+  (3, '7264', 1, 0, '2023-03-15 08:35:00'),
+  (3, '2385', 2, 2, '2023-03-15 08:40:00');
+
+
+
