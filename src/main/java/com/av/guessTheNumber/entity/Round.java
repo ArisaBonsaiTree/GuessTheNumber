@@ -22,11 +22,13 @@ public class Round {
         this.timeStamp = timeStamp;
     }
 
-    public Round(int gameId, String userGuess, int partialCorrect, int exactCorrect) {
+    public Round(int roundId, int gameId, String userGuess, int partialCorrect, int exactCorrect, LocalDateTime timeStamp) {
+        this.roundId = roundId;
         this.gameId = gameId;
-        this.partialCorrect = partialCorrect;
         this.userGuess = userGuess;
+        this.partialCorrect = partialCorrect;
         this.exactCorrect = exactCorrect;
+        this.timeStamp = timeStamp;
     }
 
     public int getRoundId() {

@@ -32,27 +32,13 @@ public class RoundDaoDB implements RoundDao{
         @Override
         public Round mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new Round(
-                    rs.getInt("roundId"),
-                    rs.getInt("gameId"),
-                    rs.getString("userGuess"),
-                    rs.getTimestamp("createdAt").toLocalDateTime()
+              rs.getInt("roundId"),
+              rs.getInt("gameId"),
+              rs.getString("userGuess"),
+              rs.getInt("partialCorrect"),
+              rs.getInt("exactCorrect"),
+              rs.getTimestamp("createdAt").toLocalDateTime()
             );
         }
-    }
-
-    @Override
-    public Round addRound(Round round) {
-        final String ADD_ROUND = "INSERT INTO round(gameId, userGuess, partialCorrect, exactCorrect) " +
-                "VALUES(?, ?, ?, ?)";
-        jdbcTemplate.update(ADD_ROUND, round.getGameId(), round.getUserGuess(), round.getPartialCorrect(), round.getExactCorrect());
-        round.setRoundId(getLastRoundId());
-
-        return round;
-    }
-
-    private int getLastRoundId(){
-        final String LAST_ROUND_ID = "SELECT gameId FROM round ORDER BY roundId DESC LIMIT 1";
-        Integer lastRoundId = jdbcTemplate.queryForObject(LAST_ROUND_ID, Integer.class);
-        return lastRoundId != null ? lastRoundId : 0;
     }
 }

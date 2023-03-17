@@ -62,10 +62,4 @@ public class GameDaoDB implements GameDao{
             );
         }
     }
-
-    @Override
-    public void updateGame(Game game) {
-        final String CHANGE_PROGRESS = "UPDATE game SET inProgress = ? WHERE gameId = ?";
-        jdbcTemplate.update(CHANGE_PROGRESS, game.isInProgress(), game.getGameId());
-    }
 }

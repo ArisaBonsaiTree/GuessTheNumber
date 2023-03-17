@@ -19,6 +19,4 @@ public class Guess {
     public void setUserGuess(String userGuess) {
         this.userGuess = userGuess;
     }
-
-
 }

@@ -6,6 +6,4 @@ import java.util.List;
 
 public interface RoundDao {
     List<Round> getRoundsByGameId(int gameId);
-
-    Round addRound(Round round);
 }
