@@ -89,7 +89,6 @@ public class ServiceLayer {
             gameDao.updateGame(game);
         }
 
-
         return roundDao.addRound(round);
     }
 

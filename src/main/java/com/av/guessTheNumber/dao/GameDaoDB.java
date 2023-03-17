@@ -48,7 +48,7 @@ public class GameDaoDB implements GameDao{
 
     @Override
     public void updateGame(Game game) {
-        final String UPDATE_GAME_OBJECT = "UPDATE game SET finished = ? WHERE game_id = ?";
+        final String UPDATE_GAME_OBJECT = "UPDATE game SET inProgress = ? WHERE gameId = ?";
         jdbcTemplate.update(UPDATE_GAME_OBJECT, game.isInProgress(), game.getGameId());
     }
 

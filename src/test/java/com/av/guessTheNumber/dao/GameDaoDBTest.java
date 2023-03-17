@@ -46,9 +46,38 @@ class GameDaoDBTest {
 
     @Test
     void getGameById() {
+        Game game1 = new Game();
+        Game game2 = new Game();
+        Game game3 = new Game();
+        Game game4 = new Game();
+        Game game5 = new Game();
+
+        gameDao.addGame(game1);
+        gameDao.addGame(game2);
+        gameDao.addGame(game3);
+        gameDao.addGame(game4);
+        gameDao.addGame(game5);
+
+
+        assertEquals(game5.getGameId(), 5);
     }
 
     @Test
     void updateGame() {
+        gameDao.addGame(new Game());
+
+        Game getGame = gameDao.getGameById(1);
+
+        assertTrue(getGame.isInProgress());
+
+        getGame.setInProgress(false);
+
+        // jdbcTemplate.update(UPDATE_GAME_OBJECT, game.isInProgress(), game.getGameId());
+        System.out.println("game.isInProgress: " + getGame.isInProgress());
+        System.out.println("game.isInProgress: " + getGame.getGameId());
+        gameDao.updateGame(getGame);
+
+        assertFalse(getGame.isInProgress());
+
     }
 }
