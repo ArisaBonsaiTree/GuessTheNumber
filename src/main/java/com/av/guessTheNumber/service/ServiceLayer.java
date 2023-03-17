@@ -42,9 +42,21 @@ public class ServiceLayer {
         return games;
     }
 
+    private boolean hasDuplicates(String input) {
+        for (int i = 0; i < input.length(); i++) {
+            for (int j = i + 1; j < input.length(); j++) {
+                if (input.charAt(i) == input.charAt(j)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
     public Round makeGuess(Guess guess) {
         Game game = gameDao.getGameById(guess.getGameId());
-        if (game == null || guess.getUserGuess() == null) return null;
+        if (game == null || guess.getUserGuess() == null || hasDuplicates(guess.getUserGuess())) return null;
 
         String answer = game.getGeneratedNumber();
         String userGuess = guess.getUserGuess();

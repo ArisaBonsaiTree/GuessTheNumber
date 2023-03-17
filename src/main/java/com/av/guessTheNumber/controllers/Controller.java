@@ -30,27 +30,48 @@ public class Controller {
     // finished if the guess is correct.
     // It returns the Round object with the results filled in.
     @PostMapping("/guess")
-    public Round makeGuess(@RequestBody Guess guess){
-        return serviceLayer.makeGuess(guess);
+    public ResponseEntity<Round> makeGuess(@RequestBody Guess guess) {
+        Round round = serviceLayer.makeGuess(guess);
+        if (round == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        } else {
+            return ResponseEntity.ok(round);
+        }
     }
+
 
     // GET – Returns a list of all games. Be sure in-progress games do not display their answer.
     @GetMapping("/game")
-    public List<Game> getAllGames(){
-        return serviceLayer.getAllGames();
+    public ResponseEntity<List<Game>> getAllGames() {
+        List<Game> games = serviceLayer.getAllGames();
+        if (games.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } else {
+            return ResponseEntity.ok(games);
+        }
     }
 
     // GET – Returns a specific game based on ID. Be sure in-progress games do not display their answer.
     @GetMapping("/game/{gameId}")
-    public Game getGameById(@PathVariable("gameId") int gameId){
-        return serviceLayer.getGameById(gameId);
+    public ResponseEntity<Game> getGameById(@PathVariable("gameId") int gameId) {
+        Game game = serviceLayer.getGameById(gameId);
+        if (game == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } else {
+            return ResponseEntity.ok(game);
+        }
     }
 
 
     // GET – Returns a list of rounds for the specified game sorted by time.
     @GetMapping("/rounds/{gameId}")
-    public List<Round> getRoundsForGame(@PathVariable("gameId") int gameId){
-        return serviceLayer.getRoundsForGame(gameId);
+    public ResponseEntity<List<Round>> getRoundsForGame(@PathVariable("gameId") int gameId) {
+        List<Round> rounds = serviceLayer.getRoundsForGame(gameId);
+        if (rounds.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } else {
+            return ResponseEntity.ok(rounds);
+        }
     }
 
 }

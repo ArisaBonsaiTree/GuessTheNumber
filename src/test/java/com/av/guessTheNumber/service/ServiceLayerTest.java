@@ -9,11 +9,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
@@ -58,13 +61,14 @@ class ServiceLayerTest {
     @Test
     void makeGuess() {
         serviceLayer.beginGame();
-
         Guess guess = new Guess(1, "1234");
-
         Round round = serviceLayer.makeGuess(guess);
-
         assertEquals(round.getGameId(), serviceLayer.getGameById(1).getGameId());
 
+
+        Guess guess1 = new Guess(1, "1111");
+        Round round1 = serviceLayer.makeGuess(guess1);
+        assertNull(round1);
     }
 
     @Test
