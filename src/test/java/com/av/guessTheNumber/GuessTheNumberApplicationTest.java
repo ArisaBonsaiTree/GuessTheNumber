@@ -14,7 +14,7 @@ class GuessTheNumberApplicationTest {
     private ApplicationContext applicationContext;
 
     @Test
-    public void contextLoads(){
+    public void contextLoads() {
         assertThat(applicationContext.getBean("serviceLayer")).isNotNull();
     }
 }

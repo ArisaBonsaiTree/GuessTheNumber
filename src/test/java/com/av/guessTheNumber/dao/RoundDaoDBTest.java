@@ -6,16 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -39,7 +37,7 @@ class RoundDaoDBTest {
         gameDao.addGame(game);
 
 
-        for(int i = 0; i < MAX_LOOP; i++){
+        for (int i = 0; i < MAX_LOOP; i++) {
             Round round = new Round();
 
             round.setGameId(game.getGameId());

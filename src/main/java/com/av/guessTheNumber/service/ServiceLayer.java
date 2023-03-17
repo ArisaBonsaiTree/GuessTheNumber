@@ -5,7 +5,6 @@ import com.av.guessTheNumber.dao.RoundDao;
 import com.av.guessTheNumber.entity.Game;
 import com.av.guessTheNumber.entity.Guess;
 import com.av.guessTheNumber.entity.Round;
-import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,11 +31,11 @@ public class ServiceLayer {
         return "Game " + game.getGameId() + " has been created!";
     }
 
-    public List<Game> getAllGames(){
+    public List<Game> getAllGames() {
         List<Game> games = gameDao.getAllGames();
 
-        for(Game game: games){
-            if(game.isInProgress()){
+        for (Game game : games) {
+            if (game.isInProgress()) {
                 game.setGeneratedNumber(REDACTED);
             }
         }
@@ -45,7 +44,7 @@ public class ServiceLayer {
 
     public Round makeGuess(Guess guess) {
         Game game = gameDao.getGameById(guess.getGameId());
-        if(game == null || guess.getUserGuess() == null) return null;
+        if (game == null || guess.getUserGuess() == null) return null;
 
         String answer = game.getGeneratedNumber();
         String userGuess = guess.getUserGuess();
@@ -60,18 +59,18 @@ public class ServiceLayer {
         // Round Id is unknown
         Round round = createRound(game, userGuess, exact, partial);
 
-        if(exact == game.getGeneratedNumber().length()){
+        if (exact == game.getGeneratedNumber().length()) {
             game.setInProgress(false);
             gameDao.updateGame(game);
         }
-        
+
         return roundDao.addRound(round);
     }
 
     public Game getGameById(int gameId) {
         Game game = gameDao.getGameById(gameId);
 
-        if(game.isInProgress()){
+        if (game.isInProgress()) {
             game.setGeneratedNumber(REDACTED);
         }
 
@@ -82,7 +81,7 @@ public class ServiceLayer {
         return roundDao.getRoundsByGameId(gameId);
     }
 
-    private String getResults(String userGuess, String answer, Map<String, Integer> answerKey){
+    private String getResults(String userGuess, String answer, Map<String, Integer> answerKey) {
         int exact = 0;
         int partial = 0;
 
@@ -124,7 +123,7 @@ public class ServiceLayer {
         return answerKey;
     }
 
-    private String generateRandomNumber(){
+    private String generateRandomNumber() {
         List<Integer> digits = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             digits.add(i);

@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -87,8 +87,5 @@ class ServiceLayerTest {
 
         List<Round> rounds = serviceLayer.getRoundsForGame(1);
         assertEquals(rounds.size(), 3);
-
-
-
     }
 }
