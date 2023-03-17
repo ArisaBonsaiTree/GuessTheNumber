@@ -60,7 +60,8 @@ public class Game {
 
         Game otherGameObject = (Game) object;
 
-        return gameId == otherGameObject.gameId && inProgress == otherGameObject.inProgress &&
-                (generatedNumber != null ? generatedNumber.equals(otherGameObject.generatedNumber) : otherGameObject.generatedNumber == null);
+        return gameId == otherGameObject.gameId &&
+                inProgress == otherGameObject.inProgress &&
+                generatedNumber.equals(otherGameObject.generatedNumber);
     }
 }
