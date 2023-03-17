@@ -41,4 +41,26 @@ public class Game {
     public void setGeneratedNumber(String generatedNumber) {
         this.generatedNumber = generatedNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "gameId=" + gameId +
+                ", generatedNumber='" + generatedNumber + '\'' +
+                ", inProgress=" + inProgress +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()){
+            return false;
+        }
+
+        Game otherGameObject = (Game) object;
+
+        return gameId == otherGameObject.gameId && inProgress == otherGameObject.inProgress &&
+                (generatedNumber != null ? generatedNumber.equals(otherGameObject.generatedNumber) : otherGameObject.generatedNumber == null);
+    }
 }

@@ -28,6 +28,11 @@ class GameDaoDBTest {
 
     @Test
     void addGame() {
+        Game game = new Game(1, "9876", true);
+        game = gameDao.addGame(game);
+        Game getGame = gameDao.getGameById(game.getGameId());
+        // Had to override our equals method to get this to work!
+        assertEquals(game, getGame);
     }
 
     @Test
@@ -65,19 +70,13 @@ class GameDaoDBTest {
     @Test
     void updateGame() {
         gameDao.addGame(new Game());
-
         Game getGame = gameDao.getGameById(1);
 
         assertTrue(getGame.isInProgress());
 
         getGame.setInProgress(false);
-
-        // jdbcTemplate.update(UPDATE_GAME_OBJECT, game.isInProgress(), game.getGameId());
-        System.out.println("game.isInProgress: " + getGame.isInProgress());
-        System.out.println("game.isInProgress: " + getGame.getGameId());
         gameDao.updateGame(getGame);
 
         assertFalse(getGame.isInProgress());
-
     }
 }
