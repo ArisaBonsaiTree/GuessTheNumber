@@ -37,3 +37,112 @@ All of your public DAO interface methods should be tested thoroughly.
 
 ## Submitting Your Assessment
 Once the code works and meets all requirements, submit your code using instructions provided by your instructor.
+
+## Endpoints
+
+### localhost:8080
+The default url 
+
+### @PostMapping(/begin)
+Start a new game
+
+Request Parameters
+None.
+
+Response Parameters
+Game 8 has been created!
+
+### @PostMapping(/guess)
+Make a guess 
+
+
+
+Request Parameters
+Content-Type: application/json
+{
+	"gameId": 7,
+	"userGuess": "1234"
+}
+
+Response Parameters
+{
+	"roundId": 32,
+	"gameId": 7,
+	"userGuess": "1234",
+	"partialCorrect": 1,
+	"exactCorrect": 0,
+	"timeStamp": "2023-03-17T07:53:55.1455724"
+}
+
+### @GetMapping(/game)
+Get a list of all games
+
+Request Parameters
+None.
+
+Response Parameters
+[
+	{
+		"gameId": 1,
+		"generatedNumber": "****",
+		"inProgress": true
+	},
+	{
+		"gameId": 2,
+		"generatedNumber": "****",
+		"inProgress": true
+	},
+	{
+		"gameId": 3,
+		"generatedNumber": "9823",
+		"inProgress": false
+	}
+]
+
+### @GetMapping(/game/{gameId})
+Get a specific game
+
+Request Paramaters
+'gameId' in the url
+
+Response Parameters
+{
+	"gameId": 1,
+	"generatedNumber": "****",
+	"inProgress": true
+}
+
+### @PostMapping(/rounds/{gameId})
+Get a list of rounds for a specific game 
+
+Request Paramaters
+'gameId' in the url
+
+Response Paramaters
+
+[
+	{
+		"roundId": 33,
+		"gameId": 6,
+		"userGuess": "1234",
+		"partialCorrect": 0,
+		"exactCorrect": 2,
+		"timeStamp": "2023-03-17T01:12:54"
+	},
+	{
+		"roundId": 34,
+		"gameId": 6,
+		"userGuess": "1256",
+		"partialCorrect": 0,
+		"exactCorrect": 1,
+		"timeStamp": "2023-03-17T01:13:01"
+	},
+	{
+		"roundId": 35,
+		"gameId": 6,
+		"userGuess": "5634",
+		"partialCorrect": 0,
+		"exactCorrect": 1,
+		"timeStamp": "2023-03-17T01:13:13"
+	}
+]
