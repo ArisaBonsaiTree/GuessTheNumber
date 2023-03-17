@@ -23,7 +23,7 @@ public class GameDaoDB implements GameDao{
     public Game addGame(Game game) {
         final String ADD_GAME = "INSERT INTO game(numberGenerated, inProgress) VALUES (?, ?)";
         jdbcTemplate.update(ADD_GAME, game.getGeneratedNumber(), true);
-        game.setGameId(getLastGameId() + 1);
+        game.setGameId(getLastGameId());
 
         return game;
     }
@@ -61,5 +61,11 @@ public class GameDaoDB implements GameDao{
                     rs.getBoolean("inProgress")
             );
         }
+    }
+
+    @Override
+    public void updateGame(Game game) {
+        final String CHANGE_PROGRESS = "UPDATE game SET inProgress = ? WHERE gameId = ?";
+        jdbcTemplate.update(CHANGE_PROGRESS, game.isInProgress(), game.getGameId());
     }
 }

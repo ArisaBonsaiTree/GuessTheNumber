@@ -8,9 +8,7 @@ import com.av.guessTheNumber.entity.Round;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,7 +42,46 @@ public class ServiceLayer {
 
 
     public Round makeGuess(Guess guess) {
-        return null;
+        Game game = gameDao.getGameById(guess.getGameId());
+        if(game == null || guess.getUserGuess() == null){
+            return null;
+        }
+
+        String answer = game.getGeneratedNumber();
+        String userGuess = guess.getUserGuess();
+
+        // Suppose the answer is "1234"
+        // 1 -> 0
+        // 2 -> 1
+        // Key is the digit and value is their digit place
+
+        Map<String, String> answerKey = new HashMap<>();
+        for(int i = 0; i < answer.length(); i++){
+            answerKey.put(answer.substring(i, i + 1), String.valueOf(i));
+        }
+
+        int exact = 0;
+        int partial = 0;
+
+        for(int i = 0; i < userGuess.length(); i++){
+            String currentDigit = userGuess.substring(i, i + 1);
+
+            if(answerKey.containsKey(currentDigit)){
+                if(answerKey.get(currentDigit).equals(i)){
+                    exact++;
+                }else{
+                    partial++;
+                }
+            }
+        }
+
+        if(exact == 4){
+            game.setInProgress(false);
+            gameDao.updateGame(game);
+        }
+
+        return roundDao.addRound(new Round(game.getGameId(), userGuess, exact, partial));
+
     }
 
 
