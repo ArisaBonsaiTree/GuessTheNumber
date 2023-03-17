@@ -5,6 +5,7 @@ import com.av.guessTheNumber.dao.RoundDao;
 import com.av.guessTheNumber.entity.Game;
 import com.av.guessTheNumber.entity.Guess;
 import com.av.guessTheNumber.entity.Round;
+import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -98,7 +99,7 @@ public class ServiceLayer {
             }
         }
 
-        return exact + "" + partial;
+        return "" + exact + DELIMITER + partial;
     }
 
     private Round createRound(Game game, String userGuess, int exact, int partial) {

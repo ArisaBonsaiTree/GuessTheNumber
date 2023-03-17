@@ -4,6 +4,11 @@ public class Guess {
     private int gameId;
     private String userGuess;
 
+    public Guess(int gameId, String userGuess) {
+        this.gameId = gameId;
+        this.userGuess = userGuess;
+    }
+
     public int getGameId() {
         return gameId;
     }
