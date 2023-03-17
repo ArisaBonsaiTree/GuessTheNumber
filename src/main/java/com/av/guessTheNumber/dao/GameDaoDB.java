@@ -46,6 +46,11 @@ public class GameDaoDB implements GameDao{
         }
     }
 
+    @Override
+    public void updateGame(Game game) {
+        final String UPDATE_GAME_OBJECT = "UPDATE game SET finished = ? WHERE game_id = ?";
+        jdbcTemplate.update(UPDATE_GAME_OBJECT, game.isInProgress(), game.getGameId());
+    }
 
     private int getLastGameId() {
         final String LAST_GAME_ID = "SELECT gameId FROM game ORDER BY gameId DESC LIMIT 1";

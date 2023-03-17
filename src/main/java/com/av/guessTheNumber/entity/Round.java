@@ -31,6 +31,10 @@ public class Round {
         this.timeStamp = timeStamp;
     }
 
+    public Round() {
+
+    }
+
     public int getRoundId() {
         return roundId;
     }
